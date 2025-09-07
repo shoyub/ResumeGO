@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&family=Racing+Sans+One&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media print {
+  #no-print {
+    display: none;
+  }
+
+  #print-area {
+    display: block;
+  }
+  body {
+    margin: 0px;
+    padding: 0px;
+    box-shadow: none;
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+@page {
+  size: auto;
+  margin: 0mm;
+}
+
+#headingTitle {
+  font-family: "Racing Sans One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: xx-large;
+  margin-top: 2px;
+  color: hsl(var(--foreground));
+  margin-left: -8px;
+}
+
+#headingTitle > #cv {
+  padding: 30px 0 8px;
+  position: relative;
+}
+#headingTitle > #cv::before {
+  content: "";
+  position: absolute;
+  left: 57%;
+  bottom: 12px;
+  width: 45px;
+  height: 30px;
+  transform: skew(-12deg) translateX(-50%);
+  background: rgba(123, 125, 123, 0.573);
+  z-index: -1;
+}
+
+.rsw-ce ul {
+  list-style: disc;
+  padding-left: 2em;
+}
+
+.rsw-ce ol {
+  list-style: decimal;
+  padding-left: 2em;
+}
+
+/* 🎨 Black / White / Gray Theme */
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* white */
+    --foreground: 0 0% 10%; /* near black */
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 0 0% 0%; /* black */
+    --primary-foreground: 0 0% 100%; /* white */
+
+    --secondary: 0 0% 95%; /* light gray */
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 0 0% 92%; /* muted gray */
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 0 0% 92%;
+    --accent-foreground: 0 0% 10%;
+
+    --destructive: 0 0% 20%; /* dark gray for destructive */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 80%;
+    --input: 0 0% 85%;
+    --ring: 0 0% 0%; /* black ring */
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 10%; /* near black */
+    --foreground: 0 0% 98%; /* almost white */
+
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 100%; /* white text/buttons */
+    --primary-foreground: 0 0% 10%; /* black text inside */
+
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 0% 30%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 30%;
+    --input: 0 0% 30%;
+    --ring: 0 0% 90%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
