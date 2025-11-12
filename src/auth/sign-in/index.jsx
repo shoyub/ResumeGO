@@ -32,7 +32,12 @@ const SignInPage = () => {
       );
       const user = userCredential.user;
 
-      login(user);
+      // Store clean user object with uid and email
+      login({
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName
+      });
       navigate("/dashboard");
     } catch (error) {
       console.error("Signup Error: ", error.message);
@@ -54,7 +59,12 @@ const SignInPage = () => {
       );
       const user = userCredential.user;
 
-      login(user);
+      // Store clean user object with uid and email
+      login({
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName
+      });
       navigate("/dashboard");
     } catch (error) {
       console.error("Login Error: ", error.message);
@@ -68,7 +78,12 @@ const SignInPage = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      login(user);
+      // Store clean user object with uid and email
+      login({
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName
+      });
       navigate("/dashboard");
     } catch (error) {
       console.error("Google Sign-In Error:", error);

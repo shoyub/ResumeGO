@@ -70,8 +70,8 @@ const AddResume = () => {
       // Create a new resume document with selected template data
       const resumeDocRef = doc(resumesRef, `resume-${newResumeId}`);
       const resumeData = selectedTemplate
-        ? { ...selectedTemplate, resumeId: newResumeId }
-        : { resumeId: newResumeId };
+        ? { ...selectedTemplate, resumeId: newResumeId, title: resumeTitle }
+        : { resumeId: newResumeId, title: resumeTitle };
       await setDoc(resumeDocRef, resumeData);
       console.log("Resume created successfully!");
       setLoading(false);
@@ -79,7 +79,6 @@ const AddResume = () => {
       navigate(`/dashboard/${user.email}/${newResumeId}/edit`);
     } catch (error) {
       console.error("Error creating resume:", error);
-    } finally {
       setLoading(false);
     }
   };
@@ -117,62 +116,69 @@ const AddResume = () => {
           </DialogHeader>
 
           {step === 1 ? (
-            <div className="flex gap-6">
-              {/* Template Grid */}
-              <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {templates.slice(0, 21).map((template, index) => (
-                  <div
-                    key={index}
-                    className="border-2 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-all duration-200 hover:scale-105"
-                    onClick={() => handleTemplateSelect(template)}
-                    onMouseEnter={() => setHoveredTemplate(template)}
-                    onMouseLeave={() => setHoveredTemplate(null)}
-                    style={{
-                      borderColor:
-                        hoveredTemplate === template
-                          ? template.themeColor
-                          : "#e5e7eb",
-                      backgroundColor:
-                        hoveredTemplate === template ? "#f9fafb" : "white",
-                    }}
-                  >
-                    <div className="text-center">
-                      <div
-                        className="w-full h-16 rounded mb-2 mx-auto"
-                        style={{ backgroundColor: template.themeColor }}
-                      ></div>
-                      <h3 className="font-semibold text-sm mb-1">
-                        {template.jobTitle}
-                      </h3>
-                      <p className="text-xs text-gray-600">
-                        {template.firstName} {template.lastName}
-                      </p>
-                      <p className="text-xs text-gray-500 mt-1">
-                        {template.experience.length} experience
-                        {template.experience.length !== 1 ? "s" : ""} •{" "}
-                        {template.skills.length} skills
-                      </p>
+            <div>
+              <div className="flex gap-6">
+                {/* Template Grid */}
+                <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {templates.slice(0, 21).map((template, index) => (
+                    <div
+                      key={index}
+                      className="border-2 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-all duration-200 hover:scale-105"
+                      onClick={() => handleTemplateSelect(template)}
+                      onMouseEnter={() => setHoveredTemplate(template)}
+                      onMouseLeave={() => setHoveredTemplate(null)}
+                      style={{
+                        borderColor:
+                          hoveredTemplate === template
+                            ? template.themeColor
+                            : "#e5e7eb",
+                        backgroundColor:
+                          hoveredTemplate === template ? "#f9fafb" : "white",
+                      }}
+                    >
+                      <div className="text-center">
+                        <div
+                          className="w-full h-16 rounded mb-2 mx-auto"
+                          style={{ backgroundColor: template.themeColor }}
+                        ></div>
+                        <h3 className="font-semibold text-sm mb-1">
+                          {template.jobTitle}
+                        </h3>
+                        <p className="text-xs text-gray-600">
+                          {template.firstName} {template.lastName}
+                        </p>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {template.experience.length} experience
+                          {template.experience.length !== 1 ? "s" : ""} •{" "}
+                          {template.skills.length} skills
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Preview Panel */}
-              <div className="w-80 flex-shrink-0">
-                <div className="sticky top-0">
-                  <h4 className="text-sm font-medium text-gray-700 mb-3 text-center">
-                    Template Preview
-                  </h4>
-                  {hoveredTemplate ? (
-                    <TemplatePreview template={hoveredTemplate} />
-                  ) : (
-                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center text-gray-500">
-                      <p className="text-sm">
-                        Hover over a template to see preview
-                      </p>
-                    </div>
-                  )}
+                  ))}
                 </div>
+
+                {/* Preview Panel */}
+                <div className="w-80 flex-shrink-0">
+                  <div className="sticky top-0">
+                    <h4 className="text-sm font-medium text-gray-700 mb-3 text-center">
+                      Template Preview
+                    </h4>
+                    {hoveredTemplate ? (
+                      <TemplatePreview template={hoveredTemplate} />
+                    ) : (
+                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center text-gray-500">
+                        <p className="text-sm">
+                          Hover over a template to see preview
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="flex justify-end mt-4">
+                <Button onClick={() => setOpenDialog(false)} variant="ghost">
+                  Back
+                </Button>
               </div>
             </div>
           ) : (
