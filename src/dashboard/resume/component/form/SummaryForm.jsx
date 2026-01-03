@@ -3,7 +3,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ResumeContext } from "@/context/ResumeContext";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Brain, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { AIchatSession } from "../../../../../service/AiModel.js";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { app } from "@/utils/firebase_config";
@@ -97,24 +97,7 @@ const SummaryForm = ({ resumeId, email, enableNext }) => {
         <p className="text-muted-foreground">Add Summary for your job title</p>
 
         <form className="mt-7" onSubmit={onSave}>
-          <div className="flex justify-between items-end">
-            <label className="text-gray-800">Add Summary</label>
-            <Button
-              size="sm"
-              variant="outline"
-              className="border-black text-black hover:bg-black hover:text-white flex gap-2 transition-all duration-200 hover:scale-105 hover:shadow-md"
-              type="button"
-              onClick={generateSummary}
-              disabled={loading}
-            >
-              {loading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Brain className="h-4 w-4" />
-              )}
-              {loading ? "Generating..." : "Generate from AI"}
-            </Button>
-          </div>
+          <label className="text-gray-800">Add Summary</label>
 
           <Textarea
             className="mt-5 border-gray-300 focus:border-black focus:ring-black"

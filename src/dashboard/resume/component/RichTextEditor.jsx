@@ -55,7 +55,7 @@ const RichTextEditor = ({ onRichTextEditorChange, index, defaultValue }) => {
     <div>
       <div className="flex justify-between my-2">
         <label className="text-xs">Summary</label>
-        <Button
+        {/* <Button
           onClick={GenerateSummaryFromaI}
           variant="outline"
           size="sm"
@@ -63,7 +63,7 @@ const RichTextEditor = ({ onRichTextEditorChange, index, defaultValue }) => {
         >
           <Brain className="h-4 w-4" />
           {loading ? <Loader2 className="animate-spin" /> : "Generate from AI"}
-        </Button>
+        </Button> */}
       </div>
       <EditorProvider>
         <Editor
